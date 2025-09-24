@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { AiOutlineSearch} from 'react-icons/ai'
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'; 
 
 const CourseList = () => {
     const APiURl = "http://localhost:4000";

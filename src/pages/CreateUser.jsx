@@ -86,7 +86,7 @@ const Login = () => {
                   <div className='flex items-center'>
                     Remember Me
                   </div>
-                  <Link to='/login' className='flex items-center'> 
+                  <Link to='/admin/login' className='flex items-center'> 
                     have an account? <span className='text-blue-600'> Login </span>
                     </Link>
                 </div>
