@@ -7,6 +7,9 @@ import { toast } from 'react-toastify';
 
 const Login = () => {
 
+    const API_URL = process.env.NODE_ENV === "production" 
+    ? 'https://uniflow-portal-server.onrender.com/' : 'http://localhost:4000';
+
     const [fullName, setFullName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -16,7 +19,7 @@ const Login = () => {
       e.preventDefault();
 
         const data = { fullName: fullName, username: username, password: password };
-        await axios.post("http://localhost:4000/api/auth/", data).then((response) => {
+        await axios.post(`${API_URL}/api/auth/`, data).then((response) => {
             if(response.data.error) {
                 toast.error(response.data.error);
             } else{

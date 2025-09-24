@@ -6,7 +6,8 @@ import { AiOutlineSearch} from 'react-icons/ai'
 import Swal from 'sweetalert2'; 
 
 const CourseList = () => {
-    const APiURl = "http://localhost:4000";
+    const API_URL = process.env.NODE_ENV === "production" 
+    ? 'https://uniflow-portal-server.onrender.com/' : 'http://localhost:4000';
     const [courses, setCourses] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [collegeFilter, setCollegeFilter] = useState('All');
@@ -17,7 +18,7 @@ const CourseList = () => {
 
     useEffect(() => {
 
-        axios.get(`${APiURl}/api/courses`)
+        axios.get(`${API_URL}/api/courses`)
         .then((response) => {
           setCourses(response.data);
         })

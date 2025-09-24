@@ -3,6 +3,9 @@ import axios from 'axios'
 import { toast } from 'react-toastify';
 
 export const AddCourse = async () => {
+    const API_URL = process.env.NODE_ENV === "production" 
+    ? 'https://uniflow-portal-server.onrender.com/' : 'http://localhost:4000';
+
     const { value: formValues } = await Swal.fire({
         title: 'Add new Student',
         html:`
@@ -35,7 +38,7 @@ export const AddCourse = async () => {
 
     if(formValues) {
         try{
-            const res = await axios.post("http://localhost:4000/api/courses", formValues)
+            const res = await axios.post(`${API_URL}/api/courses`, formValues)
             toast.success('Course Created successfully!', {
             position: 'top-right',
             autoClose: 1000,

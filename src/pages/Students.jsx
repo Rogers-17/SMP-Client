@@ -7,7 +7,8 @@ import { AiOutlineSearch} from 'react-icons/ai'
 
 const Students = () => {
 
-  const APiURl = "http://localhost:4000";
+  const APiURl = process.env.NODE_ENV === "production" 
+    ? 'https://uniflow-portal-server.onrender.com/' : 'http://localhost:4000';
   const [students, setStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [majorFilter, setMajorFilter] = useState('All');

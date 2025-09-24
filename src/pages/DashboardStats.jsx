@@ -5,6 +5,9 @@ import axios from 'axios'
 
 const DashboardStats = () => {
 
+  const API_URL = process.env.NODE_ENV === "production" 
+    ? 'https://uniflow-portal-server.onrender.com/' : 'http://localhost:4000';
+
   const [stats, setStats] = useState([
     {
       icon: <MdMenuBook size={25}/>,
@@ -39,7 +42,7 @@ const DashboardStats = () => {
   ]);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/totals")
+    axios.get(`${API_URL}/api/totals`)
     .then((response) => {
       setStats(prevStats => prevStats.map(stat => {
         if(stat.type === "Total Courses") return { ...stat, value: response.data.totalCourses};

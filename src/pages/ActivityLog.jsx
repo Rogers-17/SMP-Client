@@ -8,7 +8,8 @@ import Swal from 'sweetalert2'
 const ActivityLog = () => {
 
     
-    const APiURl = "http://localhost:4000";
+    const API_URL = process.env.NODE_ENV === "production" 
+    ? 'https://uniflow-portal-server.onrender.com/' : 'http://localhost:4000';
     const { id } = useParams();
     const [activities, setActivities] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -25,7 +26,7 @@ const ActivityLog = () => {
   }, []); 
 
   const deleteActivity = async (id) => {
-                axios.delete(`${APiURl}/api/activities/delete/${id}`)
+                axios.delete(`${API_URL}/api/activities/delete/${id}`)
                   .then(response => {
                     setActivities((prev) => prev.filter((activities) => activities.id !== id));
                       toast.success("Deleted Successfully!");

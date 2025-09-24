@@ -9,6 +9,8 @@ import axios from 'axios'
 
 const Setting = () => {
 
+  const API_URL = process.env.NODE_ENV === "production" 
+    ? 'https://uniflow-portal-server.onrender.com/' : 'http://localhost:4000';
   const {authState} = useAuth();
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState("");
@@ -17,7 +19,7 @@ const Setting = () => {
   const [username, setUsername] = useState(""); 
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/api/auth/basicinfo/${authState.id}`,
+    axios.get(`${API_URL}/api/auth/basicinfo/${authState.id}`,
       {headers: {
         accessToken: localStorage.getItem("accessToken")
       },
