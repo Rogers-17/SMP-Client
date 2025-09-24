@@ -29,7 +29,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchDatas();
-  })
+  }, [])
 
   const quickActions = [
   { id: 1, label: "Plan Course", path: "/student/plancourses" , icon: <FaUserCircle/>},

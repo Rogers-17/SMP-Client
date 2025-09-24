@@ -21,7 +21,7 @@ const Setting = () => {
 
   useEffect(() => {
     if(loading) return;
-    if(!studentState) return;
+    if(!studentState) return; 
 
     axios.get(`${APiURl}/api/students/byId/${studentState.id}`,
       {headers: {

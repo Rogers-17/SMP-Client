@@ -7,11 +7,12 @@ import Swal from 'sweetalert2'
 
 const ActivityLog = () => {
 
+    
     const APiURl = "http://localhost:4000";
     const { id } = useParams();
     const [activities, setActivities] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const studentPerPage = 8;
+    const activityPerPage = 8;
 
     useEffect(() => {
       axios.get(`${APiURl}/api/activities/all`)
@@ -32,35 +33,34 @@ const ActivityLog = () => {
                   .catch(err => toast.error(err));
         }
 
-        
-    
       //Pagination filter
-      const totalPages = Math.ceil(activities.length / studentPerPage);
-      const indexOfLast = currentPage * studentPerPage;
-      const indexOfFirst = indexOfLast - studentPerPage;
-      const currentStudents = activities.slice(indexOfFirst, indexOfLast);
-    
-      // Pagination controls
-      const getPageNumbers = () => {
-        const maxVisible = 6;
-        let startPage = Math.max(currentPage - Math.floor(maxVisible / 2), 1);
-        let endPage = startPage + maxVisible - 1;
-    
-        if(endPage > totalPages) {
-          endPage = totalPages;
-          startPage = Math.max(endPage - maxVisible + 1, 1);
-        }
-    
-        const pages = [];
-        for (let i = startPage; i <= endPage; i++) {
-          pages.push(i);
-        }
-        return pages;
-      }
-    
-      useEffect(() => {
-        setCurrentPage(1);
-      })
+          const totalPages = Math.ceil(activities.length / activityPerPage);
+          const indexOfLast = currentPage * activityPerPage;
+          const indexOfFirst = indexOfLast - activityPerPage;
+          const currentActivities = activities.slice(indexOfFirst, indexOfLast);
+        
+          // Pagination controls
+          const getPageNumbers = () => {
+            const maxVisible = 8;
+            let startPage = Math.max(currentPage - Math.floor(maxVisible / 2), 1);
+            let endPage = startPage + maxVisible - 1;
+        
+            if(endPage > totalPages) {
+              endPage = totalPages;
+              startPage = Math.max(endPage - maxVisible + 1, 1);
+            }
+        
+            const pages = [];
+            for (let i = startPage; i <= endPage; i++) {
+              pages.push(i);
+            }
+            return pages;
+          }
+        
+          useEffect(() => {
+            setCurrentPage(1);
+          }, [])
+        
     
 
   return (
@@ -85,7 +85,7 @@ const ActivityLog = () => {
               </tr>
             </thead>
             <tbody className="text-sm text-gray-550">
-              {currentStudents.map((activities, index) => (
+              {currentActivities.map((activities, index) => (
                 <tr key={index} className="border-t border-gray-500/40">
                   <td className="md:px-4 pl-2 md:pl-4 py-3 flex items-center space-x-3 truncate">
                     <span className="truncate w-full">
